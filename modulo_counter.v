@@ -17,7 +17,7 @@ wire Fred;
 // counting logic
 full_adder adder0(
 .A(state[0]),
-  .B(1'b1),
+.B(1'b1),
 .C_in(1'b0),
 .Y(sum0),
 .C_out(carry1)
@@ -25,7 +25,7 @@ full_adder adder0(
 
 full_adder adder1(
 .A(state[1]),
-.B(1'b1),
+.B(1'b0),
 .C_in(carry1),
 .Y(sum1),
 .C_out(carry2)
@@ -33,10 +33,10 @@ full_adder adder1(
 
 full_adder adder2(
 .A(state[2]),
-.B(1'b1),
+.B(1'b0),
 .C_in(carry2),
 .Y(sum2),
-.C_out(1'b0)
+.C_out()
 );
 
 // intermediate stage
@@ -51,37 +51,33 @@ assign w2 = sum2 & ~check;
 // end of intermediate stage
 
 // state change
-dff d0(
+dffa d0(
 .Q(state[0]),
 .d(w0),
 .reset(reset),
-.clk(clk),
-.notQ()
+.clk(clk)
 );
 
-dff d1(
+dffa d1(
 .Q(state[1]),
 .d(w1),
 .reset(reset),
-.clk(clk),
-.notQ()
+.clk(clk)
 );
 
-dff d2(
+dffa d2(
 .Q(state[2]),
 .d(w2),
 .reset(reset),
-.clk(clk),
-.notQ()
+.clk(clk)
 );
 
 assign Fred = check ^ counter;
 
-dff d3(
+dffa d3(
 .Q(counter),
 .d(Fred),
 .reset(reset),
-.clk(clk),
-.notQ()
+.clk(clk)
 );
 endmodule

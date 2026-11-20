@@ -2,13 +2,13 @@ module dff(
     input d,
     input reset,
     input clk,
-    output reg  Q,
+    output reg Q,
     output notQ
     
     
 );
 
-    assign not! = ~Q;
+    assign notQ = ~Q;
 
     always @(posedge clk, posedge reset) begin
             if (reset) 

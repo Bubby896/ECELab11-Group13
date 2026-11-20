@@ -1,6 +1,6 @@
 module ripple_counter(
 
-input t, reset,
+input reset,
 input clk,
 output [2:0] Q
 );
